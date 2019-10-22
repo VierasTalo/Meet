@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="
+			default-src 'self' 'unsafe-inline' ws://10.3.119.72:3000/ http://code.jquery.com https://code.jquery.com  https://ssl.gstatic.com gap: data: blob: filesystem: ;" />
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+	<script src="https://code.jquery.com/jquery-2.1.4.js" integrity="sha256-siFczlgw4jULnUICcdm9gjQPZkw/YPDqhQ9+nAOScE4=" crossorigin="anonymous" ></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css">	
+    <title>Meet</title>
+</head>
+
+<body>
+    <div data-role="page" id="kirjautuminen">
+		<div data-role="header">			
+			<h1>Meet</h1>
+			<class="rekisteroitynyt" style="visibility: hidden;">Rekisteröityminen onnistui! Kirjaudu sisään.</class>
+		</div>
+		<div role="main" class="ui-content ui-body-a">
+			<h1>Kirjaudu</h1>
+			<form id="loginLomake">
+			<label for="user">Käyttäjätunnus:</label>
+			<input type="text" name="user" id="user">
+			<label for="pwd">Salasana:</label>
+			<input type="text" name="pwd" id="pwd">
+			<button class="ui-btn" id="kirjaudu">Kirjaudu sisään</button>
+			</form>
+			<button class="ui-btn" id="rekLink">Rekisteröidy</button>
+		</div>
+		<div data-role="footer">
+			<h1>Footer</h1>
+		</div>
+	</div>
+	<div data-role="page" id="etusivu">
+		<div data-role="header">			
+			<h1 id="kirjautuneena"></h1>
+			<class="lisatty" style="visibility: hidden;">Tapahtuma lisätty onnistuneesti.</class>
+		</div>         
+		<div role="main" class="ui-content ui-body-a">
+			<h1>Etusivu</h1>
+			<button class="ui-btn" id="tapahtumat">Tapahtumat</button>
+			<button class="ui-btn" id="lisaaTapahtuma">Lisää tapahtuma</button>
+			<button class="ui-btn" id="muokkaaTietoja">Muokkaa tietojasi</button>
+		</div>
+		<div data-role="footer">
+			<h1>Footer</h1>
+		</div>
+	</div>
+	<div data-role="page" id="tapahtumaLisayssivu">
+		<div data-role="header">
+			<h1 id="kirjautuneena"></h1>
+		</div>
+		<div role="main" class="ui-content ui-body-a">
+			<h1>Lisää tapahtuma</h1>
+			<form id="tapahtumaLisaysLomake">
+			<label for="nimi">Tapahtuman nimi:</label>
+			<input type="text" name="nimi" id="nimi">
+			<label for="sijaintiLong">Sijainnin long:</label>
+			<input type="text" name="sijaintiLong" id="sijaintiLong">
+			<label for="sijaintiLat">Sijainnin lat:</label>
+			<input type="text" name="sijaintiLat" id="sijaintiLat">
+			<label for="kuvaus">Tapahtuman kuvaus:</label>
+			<input type="text" name="kuvaus" id="kuvaus">
+			<label for="pvmklo">Päivämäärä ja kellonaika:</label>
+			<input type="text" name="pvmklo" id="pvmklo">
+			<input type="hidden" name="jarjestaja" id="jarjestaja" value="1";>
+			</form>
+			</div>
+			<button class="ui-btn" id="tapahtumaLisays">Lisää tapahtuma</button>
+			<button class="ui-btn" id="takaisin">Takaisin</button>
+		<div data-role="footer">
+			<h1>Footer</h1>
+		</div>
+	</div>
+	<div data-role="page" id="rekisteroityminen">
+		<div data-role="header">
+			<h1>Rekisteröidy</h1>
+		</div>
+		<div role="main" class="ui-content ui-body-a">
+			<form id="rekisteroitymisLomake">
+			<label for="rekuser">Käyttäjätunnus:</label>
+			<input type="text" name="rekuser" id="rekuser">
+			<label for="rekpwd">Salasana:</label>
+			<input type="text" name="rekpwd" id="rekpwd">
+			<label for="etunimi">Etunimi:</label>
+			<input type="text" name="etunimi" id="etunimi">
+			<label for="sukunimi">Sukunimi:</label>
+			<input type="text" name="sukunimi" id="sukunimi">
+			<label for="email">Sähköposti:</label>
+			<input type="text" name="email" id="email">
+			<button class="ui-btn" id="rekisteroidy">Rekisteröidy</button>
+			</form>
+			<button class="ui-btn" id="takaisinRek">Takaisin</button>
+		</div>
+		<div data-role="footer">
+			<h1>Footer</h1>
+		</div>
+	</div>
+	<div data-role="page" id="tapahtumat">
+		<div datal-role="header">
+			<h1>Tapahtumat</h1>
+		</div>
+		<div role="main" class="ui-content ui-body-a" id="naytaTapahtumat">
+			<table data-role="table" id="tapahtumatTaulu" class="ui-responsive">
+				<input type="hidden" name="kayttaja" id="kayttaja" value="1";>
+				<thead>
+						<tr>
+							<th>Tapahtuman nimi:</th>
+							<th>Kuvaus:</th>		
+							<th>Päivämäärä ja kellonaika:</th>
+							<th>Järjestäjä:</th>
+						</tr>
+					</thead>
+					<tbody>					
+					</tbody>
+			</table>
+		</div>
+	</div>
+	<script>
+		<!--Kirjautumisen tarkastaminen ja esittäminen #kirjautuneena-kentässä sivulla--!>
+		$(document).on("pagecontainershow", function( event, ui ) {	
+			var toPage = ui.toPage[0].id; 
+			if(toPage=="etusivu"){				
+				if(sessionStorage.tunnus==undefined){
+					document.location="#kirjautuminen";
+				}
+				$("#kirjautuneena").html("Kirjautuneena " + sessionStorage.tunnus);	
+			}		
+		});	
+		
+		function haeTapahtumat(){
+		$("#tapahtumatTaulu tbody").html("");
+			document.getElementById("kayttaja").value = sessionStorage.getItem("tunnus");
+			$.getJSON("http://proto387.haaga-helia.fi/~a1703017/backend/Meet/selectEventsOrganizedOrJoined.php", function(result){
+				$.each(result, function(i, field) {
+					$("#tiedotTaulu tbody").append("<tr><td>"
+													+field.nimi
+													+"</td><td>"	
+													+field.sijainti_long
+													+"</td><td>"
+													+field.sijainti_lat
+													+"</td><td>"
+													+field.kuvaus
+													+"</td><td>"
+													+field.pvmklo
+													+"</td></tr>");								
+				});
+			});
+	}
+		
+		<!--kirjautuminen palvelimelle ja takaisin--!>
+		$("#kirjaudu").on("tap", function(){
+			if($("#user").val().length>0&&$("#pwd").val().length>0){				
+				$.ajax({
+					type: 'POST',
+					data: $("#loginLomake").serialize(),
+					url: 'http://proto387.haaga-helia.fi/~a1703017/backend/Meet/selectLogin.php',
+					success: function(data){	
+						var tiedot = JSON.parse(data);	
+						if(tiedot.length>0){
+							sessionStorage.tunnus=tiedot[0].kayttajatunnus;							
+							document.location="#etusivu";
+						}else{
+							document.location="#kirjautuminen";
+						}						
+					},
+				});				
+			}			
+		});
+		<!--Etusivulta siirtyminen rekisteröitymissivulle--!>
+		$("#rekLink").on("tap", function(){
+			document.location="#rekisteroityminen";
+		});
+		<!--Rekisteröitymislomakkeen tietojen lähettäminen palvelimelle--!>
+		$("#rekisteroidy").on("tap", function(){
+			if($("#rekuser").val().length>0&&$("#rekpwd").val().length>0&&$("#email").val().length>0){
+			$.ajax({
+				type: 'POST',
+				data: $("#rekisteroitymisLomake").serialize(),
+				url: 'http://proto387.haaga-helia.fi/~a1703017/backend/Meet/insertRegister.php',
+				success: function(data){
+					document.location="#kirjautuminen";
+					$("div.rekisteroitynyt").show();
+				}
+			})
+			}
+		});
+		<!--Sivuilta takaisin etu/kirjautumissivulle--!>
+		$("#takaisin").on("tap", function(){
+			document.location="#etusivu";
+		});
+		$("#takaisinRek").on("tap", function(){
+			document.location="#kirjautuminen";
+		});
+		<!--Tapahtuman lisäämiseen siirtyminen etusivulta--!>
+		$("#lisaaTapahtuma").on("tap", function(){
+			document.location="#tapahtumaLisayssivu";
+		});
+		<!--Tapahtuman lisäämiseen siirtyminen etusivulta--!>
+		$("#tapahtumat").on("tap", function(){
+			document.location="#tapahtumat";
+			haeTapahtumat();
+		});
+		<!--Tapahtuman lisääminen palvelimelle--!>
+		$("#tapahtumaLisays").on("tap", function(){
+			if($("#nimi").val().length>0&&$("#sijaintiLat").val().length>0&&$("#sijaintiLong").val().length>0){
+			document.getElementById("jarjestaja").value = sessionStorage.getItem("tunnus");
+			$.ajax({
+				type: 'POST',
+				data: $("#tapahtumaLisaysLomake").serialize(),
+				url: 'http://proto387.haaga-helia.fi/~a1703017/backend/Meet/insertEvent.php',
+				success: function(data){
+					document.location="#etusivu";
+					$("div.lisatty").show();
+				}
+			})
+			}
+		});
+		
+	</script>
+</body>
+
+</html>
